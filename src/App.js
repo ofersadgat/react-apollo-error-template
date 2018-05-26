@@ -4,7 +4,8 @@ import gql from "graphql-tag";
 
 class App extends Component {
   render() {
-    const { data: { loading, people } } = this.props;
+	  console.log(this.props.data);
+    const { data: { loading, currentData: { query} } } = this.props;
     return (
       <main>
         <header>
@@ -28,7 +29,7 @@ class App extends Component {
           <p>Loading…</p>
         ) : (
           <ul>
-            {people.map(person => <li key={person.id}>{person.name}</li>)}
+            {query.map((item, i) => (<li key={i}>{"'" + item.name + "'"} should equal 'test'</li>))}
           </ul>
         )}
       </main>
@@ -38,10 +39,9 @@ class App extends Component {
 
 export default graphql(
   gql`
-    query ErrorTemplate {
-      people {
-        id
-        name
+    query GetMyData {
+      currentData {
+        query
       }
     }
   `
