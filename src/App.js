@@ -40,7 +40,7 @@ class App extends Component {
 export default graphql(
   gql`
     query GetMyData {
-      currentData {
+      currentData @client {
         query
       }
     }
